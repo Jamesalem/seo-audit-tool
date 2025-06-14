@@ -1,0 +1,31 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local SEO Audit</title>
+  <style>
+    body { font-family: sans-serif; width: 300px; padding: 8px; }
+    #results { margin-top: 12px; }
+    button { width: 100%; padding: 8px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h4>Local SEO Audit</h4>
+  <button id="runBtn">Audit This Page</button>
+
+  <div id="loading" class="hidden">Running audit…</div>
+
+  <div id="results" class="hidden">
+    <p><strong>Report ID:</strong> <span id="rid"></span></p>
+    <p><strong>Performance:</strong> <span id="perf"></span>%</p>
+    <p><strong>SEO:</strong> <span id="seo"></span>%</p>
+    <p><strong>Accessibility:</strong> <span id="access"></span>%</p>
+    <button id="fullBtn">View Full Report</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

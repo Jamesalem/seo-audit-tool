@@ -1,0 +1,21 @@
+{
+  "name": "audit-engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node-based audit engine for SEO Audit Tool: runs Lighthouse CLI and generates PDFs via Puppeteer",
+  "main": "runLighthouse.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "audit": "node runLighthouse.js",
+    "pdf": "node generatePdf.js",
+    "test:audit": "yarn audit https://example.com ./backend/results/test-audit.json",
+    "test:pdf": "yarn pdf test-audit ./backend/results/test-audit.pdf"
+  },
+  "dependencies": {
+    "chrome-launcher": "^1.2.0",
+    "lighthouse": "^12.6.1",
+    "puppeteer": "^24.10.0"
+  }
+}
