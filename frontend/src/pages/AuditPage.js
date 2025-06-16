@@ -16,7 +16,6 @@ export default function AuditPage() {
   // Run the audit
   const runAudit = async (url) => {
     setLoading(true);
-    setAiSummary('');
     try {
       const res = await fetch('/api/audit', {
         method: 'POST',
@@ -36,29 +35,9 @@ export default function AuditPage() {
     }
   };
 
-  // AI interpretation when reportData changes
-  useEffect(() => {
-    if (!reportData) return;
-    fetch('/api/interpret', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(reportData),
-    })
-      .then(res => {
-        if (!res.ok) throw new Error(res.statusText);
-        return res.json();
-      })
-      .then(({ summary }) => setAiSummary(summary))
-      .catch(err => {
-        console.error('Interpretation failed:', err);
-        setAiSummary('Failed to generate AI summary.');
-      });
-  }, [reportData]);
-
   const resetAudit = () => {
     setReportData(null);
     setReportId(null);
-    setAiSummary('');
   };
 
   return (
@@ -73,13 +52,6 @@ export default function AuditPage() {
       {reportData && (
         <>
           <ReportSummary data={reportData} />
-
-          {aiSummary && (
-            <Box my={4} component="div">
-              <Typography variant="h6">AI-Powered Insights</Typography>
-              <Typography>{aiSummary}</Typography>
-            </Box>
-          )}
 
           <ReportView data={reportData} />
           <PdfDownload reportId={reportId} />

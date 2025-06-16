@@ -24,3 +24,5 @@ yarn-error.log
 # ── OS Files ─────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+
+# Ignore audit results backend/results/*.json backend/results/*.pdf

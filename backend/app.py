@@ -3,14 +3,19 @@ import os
 import sys
 import json
 import logging
-from dotenv import load_dotenv
+from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 from flask import Flask, jsonify
 from flask_cors import CORS
 from routes.audit import audit_bp
 from routes.report import report_bp
-from routes.interpret import interpret_bp
 
-load_dotenv()
+# Tell dotenv exactly which .env file to load
+env_path = Path(__file__).parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
+# For safety, always load or override from find_dotenv if needed
+load_dotenv(find_dotenv())
 
 class JsonFormatter(logging.Formatter):
     def format(self, record):
@@ -52,7 +57,6 @@ def create_app():
     # Register API blueprints
     app.register_blueprint(audit_bp,     url_prefix="/api")
     app.register_blueprint(report_bp,    url_prefix="/api")
-    app.register_blueprint(interpret_bp, url_prefix="/api")
 
     # Health-check endpoint
     @app.route("/healthz", methods=["GET"])

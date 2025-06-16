@@ -1,15 +1,16 @@
-version: '3'
+version: '3.8'
+
 services:
   backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
+    env_file:
+      - backend/.env
     ports:
       - "5000:5000"
     volumes:
       - ./backend/results:/app/results
-    env_file:
-      - backend/.env
 
   frontend:
     build:
@@ -18,7 +19,7 @@ services:
     ports:
       - "3000:80"
 
-  # (Optional) A simple Postgres service if you switch from JSON file storage:
+  # Optional Postgres if you later switch from JSON storage
   db:
     image: postgres:15-alpine
     environment:
